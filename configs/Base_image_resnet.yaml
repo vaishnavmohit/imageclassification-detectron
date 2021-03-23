@@ -1,0 +1,32 @@
+MODEL:
+  META_ARCHITECTURE: "ClsResNet"
+  BACKBONE:
+    NAME: "build_rnet_backbone"
+    FREEZE_AT: 0
+  RESNETS:
+    DEPTH: 50
+    OUT_FEATURES: ['res5']
+    ENABLE: True
+    NUM_CLASSES: 1000
+    RES5_DILATION: 1
+  CLSNET:
+    INPUT_SIZE: 256
+DATASETS:
+  TRAIN: ("imagenet_train", )
+  TEST: ("imagenet_val", )
+DATALOADER:
+  NUM_WORKERS: 3
+  ASPECT_RATIO_GROUPING: False
+SOLVER:
+  IMS_PER_BATCH: 256
+  BASE_LR: 0.1
+  STEPS: (117000, 234000,)
+  MAX_ITER: 351000
+  WARMUP_FACTOR: .001
+  WARMUP_ITERS: 1000
+INPUT:
+  CROP:
+    ENABLED: True
+    SIZE: [224, 224]
+OUTPUT_DIR : "../../dump/fossil/imagenet/1mar-temp/"
+VERSION: 2
